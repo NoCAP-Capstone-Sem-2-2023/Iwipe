@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import '';
 
 class AuthPage extends StatelessWidget {
   final Locale? currentLocale;
@@ -38,12 +39,15 @@ class AuthPage extends StatelessWidget {
               ElevatedButton(
                 onPressed: () {
                   // TODO: Implement sign in logic
+
+                  Navigator.pushNamed(context, '/signin');
                 },
                 child: Text(AppLocalizations.of(context)!.signIn),
               ),
               ElevatedButton(
                 onPressed: () {
                   // TODO: Implement sign up logic
+                  Navigator.pushNamed(context, '/signup');
                 },
                 child: Text(AppLocalizations.of(context)!.signUp),
               ),
