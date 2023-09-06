@@ -1,53 +1,46 @@
-
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:iwipe/pages/signIn/signIn.dart';
+import 'package:iwipe/pages/splashScreen/bloc/splashScreen_blocs.dart';
+import 'package:iwipe/pages/splashScreen/splashScreen.dart';
+import 'package:iwipe/app_blocs.dart';
+
 import 'views/landingPage.dart';
 import 'views/authPage.dart';
 import 'views/signUpPage.dart';
 import 'views/signInPage.dart';
 
-class MyApp extends StatefulWidget {
-  @override
-  _MyAppState createState() => _MyAppState();
-}
-
-class _MyAppState extends State<MyApp> {
-  Locale? _currentLocale;
-
-  @override
-  void initState() {
-    super.initState();
-    _currentLocale = Locale('en', ''); // Default locale
-  }
-
-  void _changeLanguage(String languageCode) {
-    setState(() {
-      _currentLocale = Locale(languageCode, '');
-    });
-  }
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      locale: _currentLocale,
-      localizationsDelegates: const [
-        AppLocalizations.delegate,
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<AppBlocs>(
+          create: (context) => AppBlocs(),
+        ),
+        BlocProvider<SplashScreenBloc>(
+          create: (context) => SplashScreenBloc(),
+        ),
       ],
-      supportedLocales: const [
-        Locale('en', ''),
-        Locale('it', ''),
-        Locale('vi', ''),
-      ],
-      routes: {
-        '/': (context) => LandingPage(changeLanguage: _changeLanguage),
-        '/auth': (context) => AuthPage(currentLocale: _currentLocale),
-        '/signup': (context) => SignUpPage(currentLocale: _currentLocale),
-        '/signin': (context) => SignInPage(currentLocale: _currentLocale),
-      },
+      child: ScreenUtilInit(
+          builder: (context, child) => MaterialApp(
+                debugShowCheckedModeBanner: false,
+                theme: ThemeData(
+                  appBarTheme: AppBarTheme(
+                    backgroundColor: Color.fromRGBO(241, 241, 241, 1),
+                    elevation: 0,
+                  ),
+                ),
+                home: const SplashScreen(),
+                routes: {
+                  "signIn": (context) => const SignIn(),
+                },
+              )),
     );
   }
 }
