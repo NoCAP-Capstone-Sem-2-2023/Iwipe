@@ -13,6 +13,7 @@ dependencies:
     flutter_bloc: ^8.1.2
     flutter_screenutil:
     dots_indicator:
+    cloud_firestore:
 
 
 
@@ -32,6 +33,7 @@ flutter:
     uses-material-design: true
     generate: true
     assets:
+        - assets/
         - assets/images/
         - assets/svg/
         - assets/videos/

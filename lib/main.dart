@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:iwipe/pages/splashScreen/bloc/splashScreen_blocs.dart';
 import 'package:iwipe/pages/splashScreen/splashScreen.dart';
 import 'package:iwipe/app_blocs.dart';
 
@@ -17,7 +18,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => AppBlocs(),
+      create: (context) => SplashScreenBloc(),
       child: ScreenUtilInit(
           builder: (context, child) => const MaterialApp(
                 debugShowCheckedModeBanner: false,
