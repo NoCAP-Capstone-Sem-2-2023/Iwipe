@@ -6,7 +6,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:iwipe/pages/splashScreen/bloc/splashScreen_states.dart';
 import 'package:iwipe/pages/splashScreen/bloc/splashScreen_events.dart';
 
-
 import 'bloc/splashScreen_blocs.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -18,59 +17,58 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreenState extends State<SplashScreen> {
   PageController _pageController = PageController(initialPage: 0);
+
   @override
   Widget build(BuildContext context) {
     return Container(
       color: const Color.fromRGBO(241, 241, 241, 1),
       child: Center(
-        child: Scaffold(
-          body: BlocBuilder<SplashScreenBloc,SplashScreenState>(
-            builder: (context,state){
-              return
-                Container(
-                  margin: EdgeInsets.only(top: 34.h),
-                  width: 375.w,
-                  child: Stack(
-                    alignment: Alignment.topCenter,
+        child: Scaffold(body: BlocBuilder<SplashScreenBloc, SplashScreenState>(
+          builder: (context, state) {
+            return Container(
+              margin: EdgeInsets.only(top: 34.h),
+              width: 375.w,
+              child: Stack(
+                alignment: Alignment.topCenter,
+                children: [
+                  PageView(
+                    controller: _pageController,
+                    onPageChanged: (index) {
+                      state.page = index;
+                      BlocProvider.of<SplashScreenBloc>(context)
+                          .add(SplashScreenEvent());
+                    },
                     children: [
-                      PageView(
-                        controller: _pageController,
-                        onPageChanged: (index) {
-                          state.page = index;
-                          BlocProvider.of<SplashScreenBloc>(context)
-                              .add(SplashScreenEvent());
-                        },
-                        children: [
-                          _page(
-                              1,
-                              context,
-                              "Next",
-                              "Welcome to the iWipe training app - the revolutionary cleaning training program that provides you with the skills and knowledge to start your own cleaning business.",
-                              "assets/images/reading.png"),
-                          _page(2, context, "Get Started", "Page 2.", "assets/images/boy.png"),
-                        ],
-                      ),
-                      Positioned(
-                          bottom: 100.h,
-                          child: DotsIndicator(
-                            position: state.page,
-                            dotsCount: 2,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            decorator: DotsDecorator(
-                              color: Colors.grey,
-                              activeColor: Colors.blue,
-                              size: const Size.square(8.0),
-                              activeSize: const Size(18.0, 8.0),
-                              activeShape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(5.0)),
-                            ),
-                          ))
+                      _page(
+                          1,
+                          context,
+                          "Next",
+                          "Welcome to the iWipe training app - the revolutionary cleaning training program that provides you with the skills and knowledge to start your own cleaning business.",
+                          "assets/images/reading.png"),
+                      _page(2, context, "Get Started", "Page 2.",
+                          "assets/images/boy.png"),
                     ],
                   ),
-                );
-            },
-          )
-        ),
+                  Positioned(
+                      bottom: 100.h,
+                      child: DotsIndicator(
+                        position: state.page,
+                        dotsCount: 2,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        decorator: DotsDecorator(
+                          color: Colors.grey,
+                          activeColor: Colors.blue,
+                          size: const Size.square(8.0),
+                          activeSize: const Size(18.0, 8.0),
+                          activeShape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(5.0)),
+                        ),
+                      ))
+                ],
+              ),
+            );
+          },
+        )),
       ),
     );
   }
@@ -99,13 +97,15 @@ class _SplashScreenState extends State<SplashScreen> {
           ),
         ),
         GestureDetector(
-          onTap: (){
-            if(index <2){
+          onTap: () {
+            if (index < 2) {
               //Animation while swipe on splash screen
 
-              _pageController.animateToPage(index, duration: Duration(milliseconds: 700), curve: Curves.easeIn);
-            }else{
-              Navigator.pushNamed(context, '/landingPage');
+              _pageController.animateToPage(index,
+                  duration: Duration(milliseconds: 500), curve: Curves.easeIn);
+            } else {
+              Navigator.of(context)
+                  .pushNamedAndRemoveUntil("signIn", (route) => false);
             }
           },
           child: Container(
