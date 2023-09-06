@@ -9,6 +9,15 @@ environment:
 dependencies:
     flutter:
         sdk: flutter
+
+    flutter_bloc: ^8.1.2
+    flutter_screenutil:
+    dots_indicator:
+
+
+
+
+
     flutter_localizations:
         sdk: flutter
     intl: ^0.18.1
