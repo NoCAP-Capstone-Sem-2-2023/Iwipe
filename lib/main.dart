@@ -8,11 +8,6 @@ import 'package:iwipe/pages/splashScreen/bloc/splashScreen_blocs.dart';
 import 'package:iwipe/pages/splashScreen/splashScreen.dart';
 import 'package:iwipe/app_blocs.dart';
 
-import 'views/landingPage.dart';
-import 'views/authPage.dart';
-import 'views/signUpPage.dart';
-import 'views/signInPage.dart';
-
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
