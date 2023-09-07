@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:iwipe/pages/signIn/bloc/sign_in_bloc.dart';
 import 'package:iwipe/pages/signIn/signIn.dart';
 import 'package:iwipe/pages/splashScreen/bloc/splashScreen_blocs.dart';
 import 'package:iwipe/pages/splashScreen/splashScreen.dart';
@@ -21,6 +22,7 @@ class MyApp extends StatelessWidget {
         BlocProvider<SplashScreenBloc>(
           create: (context) => SplashScreenBloc(),
         ),
+        BlocProvider(create: (context)=>SignInBloc()),
       ],
       child: ScreenUtilInit(
           builder: (context, child) => MaterialApp(

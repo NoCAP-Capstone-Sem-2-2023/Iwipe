@@ -1,7 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:iwipe/pages/signIn/bloc/sign_in_bloc.dart';
+import 'package:iwipe/pages/signIn/signInController.dart';
 import 'package:iwipe/pages/signIn/widgets/signInWidget.dart';
+
+import 'bloc/sign_in_event.dart';
+import 'bloc/sign_in_state.dart';
 
 class SignIn extends StatefulWidget {
   const SignIn({Key? key}) : super(key: key);
@@ -13,40 +19,56 @@ class SignIn extends StatefulWidget {
 class _SignInState extends State<SignIn> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: const Color.fromRGBO(241, 241, 241, 1),
-      child: SafeArea(
-        child: Scaffold(
-          backgroundColor: Color.fromRGBO(241, 241, 241, 1),
-          appBar: buildAppBar(),
-          body: SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                buildThirdPartyLogin(context),
-                Center(child: reusableText("Or use your email address to Login")),
-                Container(
-                    margin: EdgeInsets.only(top: 20.h),
-                    padding: EdgeInsets.only(left: 25.w),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        reusableText("Email Address"),
-                        buildTextField("Enter Email Address","email","user"),
-                        reusableText("Password"),
-                        buildTextField("Enter Your Password","password","lock"),
-
-
-                      ],
-                    )),
-                forgotPassword(),
-                buildButton("Log In"),
-                buildButton("Register")
-              ],
+    return BlocBuilder<SignInBloc, SignInState>(builder: (context, state) {
+      return Container(
+        color: const Color.fromRGBO(241, 241, 241, 1),
+        child: SafeArea(
+          child: Scaffold(
+            backgroundColor: Color.fromRGBO(241, 241, 241, 1),
+            appBar: buildAppBar(),
+            body: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  buildThirdPartyLogin(context),
+                  Center(
+                      child:
+                          reusableText("Or use your email address to Login")),
+                  Container(
+                      margin: EdgeInsets.only(top: 20.h),
+                      padding: EdgeInsets.only(left: 25.w),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          reusableText("Email Address"),
+                          buildTextField("Enter Email Address", "email", "user",
+                              (value) {
+                            context
+                                .read<SignInBloc>()
+                                .add(SignInEmailChanged(value));
+                          }),
+                          reusableText("Password"),
+                          buildTextField(
+                              "Enter Your Password", "password", "lock",
+                              (value) {
+                            context
+                                .read<SignInBloc>()
+                                .add(SignInPasswordChanged(value));
+                          }),
+                        ],
+                      )),
+                  forgotPassword(),
+                  buildButton("Log In", () {
+                    print('Log In');
+                    SignInController(context: context).handleSignIn("email");
+                  }),
+                  buildButton("Register", () {})
+                ],
+              ),
             ),
           ),
         ),
-      ),
-    );
+      );
+    });
   }
 }

@@ -2,9 +2,8 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
-
-part 'sign_in_event.dart';
-part 'sign_in_state.dart';
+import 'sign_in_event.dart';
+import 'sign_in_state.dart';
 
 class SignInBloc extends Bloc<SignInEvent, SignInState> {
   SignInBloc() : super(SignInState()) {
@@ -14,6 +13,7 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
 
   void _onEmailChanged(SignInEmailChanged event, Emitter<SignInState> emit) {
     emit(state.copyWith(email: event.email));
+    print(event.email);
   }
   void _onPasswordChanged(SignInPasswordChanged event, Emitter<SignInState> emit) {
     emit(state.copyWith(password: event.password));

@@ -64,15 +64,16 @@ Widget reusableText(String text) {
   );
 }
 
-Widget buildTextField(String text, String textType, String icon) {
+Widget buildTextField(String text, String textType, String icon,
+    void Function(String value)? func) {
   return Container(
     width: 325.w,
     height: 50.h,
     margin: EdgeInsets.only(top: 5.h, bottom: 20.h),
     decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.all(Radius.circular(15.w)),
-        border: Border.all(color: Colors.black.withOpacity(0.5)),
+      color: Colors.white,
+      borderRadius: BorderRadius.all(Radius.circular(15.w)),
+      border: Border.all(color: Colors.black.withOpacity(0.5)),
     ),
     child: Row(
       children: [
@@ -86,6 +87,7 @@ Widget buildTextField(String text, String textType, String icon) {
           width: 270.w,
           height: 50.h,
           child: TextField(
+            onChanged: (value) => func!(value),
             keyboardType: TextInputType.multiline,
             decoration: InputDecoration(
               hintText: text,
@@ -96,24 +98,20 @@ Widget buildTextField(String text, String textType, String icon) {
               ),
               border: const OutlineInputBorder(
                   borderSide: BorderSide(
-                    color: Colors.transparent,
-                  )
-              ),
+                color: Colors.transparent,
+              )),
               enabledBorder: const OutlineInputBorder(
                   borderSide: BorderSide(
-                    color: Colors.transparent,
-                  )
-              ),
+                color: Colors.transparent,
+              )),
               disabledBorder: const OutlineInputBorder(
                   borderSide: BorderSide(
-                    color: Colors.transparent,
-                  )
-              ),
+                color: Colors.transparent,
+              )),
               focusedBorder: const OutlineInputBorder(
                   borderSide: BorderSide(
-                    color: Colors.transparent,
-                  )
-              ),
+                color: Colors.transparent,
+              )),
             ),
             style: TextStyle(
               color: Colors.black,
@@ -137,9 +135,7 @@ Widget forgotPassword() {
     height: 44.h,
     margin: EdgeInsets.only(left: 25.w),
     child: GestureDetector(
-      onTap: () {
-
-      },
+      onTap: () {},
       child: Text(
         "Forgot Password?",
         style: TextStyle(
@@ -154,27 +150,29 @@ Widget forgotPassword() {
   );
 }
 
-Widget buildButton (String buttonName){
+Widget buildButton(String buttonName, void Function()? func) {
   return GestureDetector(
-    onTap: (){
-
+    onTap: () {
+      func?.call(); // Use func?.call() to invoke the function if it's not null
     },
     child: Container(
       width: 325.w,
       height: 50.h,
-      margin: EdgeInsets.only(left: 25.w,right: 25.w,top: buttonName == "Log In" ? 40.h : 0.h,bottom: 10.h),
+      margin: EdgeInsets.only(
+          left: 25.w,
+          right: 25.w,
+          top: buttonName == "Log In" ? 40.h : 0.h,
+          bottom: 10.h),
       decoration: BoxDecoration(
-          color: buttonName=="Log In" ? Colors.blue : Colors.white,
-          borderRadius: BorderRadius.all(Radius.circular(15.w))
-      ),
+          color: buttonName == "Log In" ? Colors.blue : Colors.white,
+          borderRadius: BorderRadius.all(Radius.circular(15.w))),
       child: Center(
         child: Text(
           buttonName,
           style: TextStyle(
-            color: buttonName=="Log In" ? Colors.white : Colors.black,
-            fontSize: 18.sp,
-            fontWeight: FontWeight.w600
-          ),
+              color: buttonName == "Log In" ? Colors.white : Colors.black,
+              fontSize: 18.sp,
+              fontWeight: FontWeight.w600),
         ),
       ),
     ),
