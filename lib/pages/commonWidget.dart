@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-AppBar buildAppBar() {
+AppBar buildAppBar(String headerText) {
   return AppBar(
       bottom: PreferredSize(
         preferredSize: Size.fromHeight(1),
@@ -11,7 +11,7 @@ AppBar buildAppBar() {
         ),
       ),
       title: Text(
-        "Sign In",
+        headerText,
         style: TextStyle(
           color: Colors.black,
           fontSize: 18.sp,
@@ -98,20 +98,20 @@ Widget buildTextField(String text, String textType, String icon,
               ),
               border: const OutlineInputBorder(
                   borderSide: BorderSide(
-                    color: Colors.transparent,
-                  )),
+                color: Colors.transparent,
+              )),
               enabledBorder: const OutlineInputBorder(
                   borderSide: BorderSide(
-                    color: Colors.transparent,
-                  )),
+                color: Colors.transparent,
+              )),
               disabledBorder: const OutlineInputBorder(
                   borderSide: BorderSide(
-                    color: Colors.transparent,
-                  )),
+                color: Colors.transparent,
+              )),
               focusedBorder: const OutlineInputBorder(
                   borderSide: BorderSide(
-                    color: Colors.transparent,
-                  )),
+                color: Colors.transparent,
+              )),
             ),
             style: TextStyle(
               color: Colors.black,
@@ -150,7 +150,7 @@ Widget forgotPassword() {
   );
 }
 
-Widget buildButton(String buttonName, void Function()? func) {
+Widget buildButton(String buttonName, bool primary, void Function()? func) {
   return GestureDetector(
     onTap: () {
       func?.call(); // Use func?.call() to invoke the function if it's not null
@@ -164,7 +164,7 @@ Widget buildButton(String buttonName, void Function()? func) {
           top: buttonName == "Log In" ? 40.h : 0.h,
           bottom: 10.h),
       decoration: BoxDecoration(
-          color: buttonName == "Log In" ? Colors.blue : Colors.white,
+          color: primary ? Colors.blue : Colors.white,
           borderRadius: BorderRadius.all(Radius.circular(15.w))),
       child: Center(
         child: Text(
