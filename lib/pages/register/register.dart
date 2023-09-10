@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:iwipe/pages/register/registerController.dart';
 
 import '../commonWidget.dart';
 import 'bloc/register_blocs.dart';
@@ -43,22 +44,22 @@ class _RegisterState extends State<Register> {
                         children: [
                           reusableText("Username"),
                           buildTextField("Enter Your Username", "username", "user", (value) {
-                            context.read<RegisterBloc>().add(RegisterEmailChanged(value));
+                            context.read<RegisterBloc>().add(RegisterUsernameChanged(value));
                           }),
                           reusableText("Email"),
                           buildTextField("Enter Your Email Address", "email", "user", (value) {
-                            context.read<RegisterBloc>().add(RegisterPasswordChanged(value));
+                            context.read<RegisterBloc>().add(RegisterEmailChanged(value));
                           }),                          reusableText("Password"),
                           buildTextField("Enter Your Password", "password", "lock", (value) {
                             context.read<RegisterBloc>().add(RegisterPasswordChanged(value));
                           }),                          reusableText("Password"),
                           buildTextField("Enter Your Confirm Password", "password", "lock", (value) {
-                            context.read<RegisterBloc>().add(RegisterPasswordChanged(value));
+                            context.read<RegisterBloc>().add(RegisterConfirmPasswordChanged(value));
                           }),
                         ],
                       )),
                   buildButton("Register",true, () {
-                    print('Register');
+                    RegisterController(context:context).handleEmailReg();
                   })
                 ],
               ),
