@@ -98,20 +98,20 @@ Widget buildTextField(String text, String textType, String icon,
               ),
               border: const OutlineInputBorder(
                   borderSide: BorderSide(
-                color: Colors.transparent,
-              )),
+                    color: Colors.transparent,
+                  )),
               enabledBorder: const OutlineInputBorder(
                   borderSide: BorderSide(
-                color: Colors.transparent,
-              )),
+                    color: Colors.transparent,
+                  )),
               disabledBorder: const OutlineInputBorder(
                   borderSide: BorderSide(
-                color: Colors.transparent,
-              )),
+                    color: Colors.transparent,
+                  )),
               focusedBorder: const OutlineInputBorder(
                   borderSide: BorderSide(
-                color: Colors.transparent,
-              )),
+                    color: Colors.transparent,
+                  )),
             ),
             style: TextStyle(
               color: Colors.black,

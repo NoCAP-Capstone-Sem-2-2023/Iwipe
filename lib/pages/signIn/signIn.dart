@@ -4,8 +4,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:iwipe/pages/signIn/bloc/sign_in_bloc.dart';
 import 'package:iwipe/pages/signIn/signInController.dart';
-import 'package:iwipe/pages/signIn/widgets/signInWidget.dart';
 
+import '../commonWidget.dart';
 import 'bloc/sign_in_event.dart';
 import 'bloc/sign_in_state.dart';
 
@@ -62,7 +62,9 @@ class _SignInState extends State<SignIn> {
                     print('Log In');
                     SignInController(context: context).handleSignIn("email");
                   }),
-                  buildButton("Register", () {})
+                  buildButton("Register", () {
+                    Navigator.of(context).pushNamed("register");
+                  })
                 ],
               ),
             ),
