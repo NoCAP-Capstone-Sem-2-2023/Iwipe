@@ -25,8 +25,8 @@ class MyApp extends StatelessWidget {
         BlocProvider<SplashScreenBloc>(
           create: (context) => SplashScreenBloc(),
         ),
-        BlocProvider(create: (context)=>SignInBloc()),
-        BlocProvider(create: (context)=>RegisterBloc())
+        BlocProvider(create: (context) => SignInBloc()),
+        BlocProvider(create: (context) => RegisterBloc())
       ],
       child: ScreenUtilInit(
           builder: (context, child) => MaterialApp(
@@ -38,7 +38,7 @@ class MyApp extends StatelessWidget {
                     elevation: 0,
                   ),
                 ),
-                home: const SplashScreen(),
+                home: const AppPage(),
                 routes: {
                   "signIn": (context) => const SignIn(),
                   "register": (context) => const Register(),
