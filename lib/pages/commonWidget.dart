@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:iwipe/common/values/colors.dart';
 
 AppBar buildAppBar(String headerText) {
   return AppBar(
@@ -164,13 +165,13 @@ Widget buildButton(String buttonName, bool primary, void Function()? func) {
           top: buttonName == "Log In" ? 40.h : 0.h,
           bottom: 10.h),
       decoration: BoxDecoration(
-          color: primary ? Colors.blue : Colors.white,
+          color: primary ? AppColors.primaryElement : AppColors.secondaryElement,
           borderRadius: BorderRadius.all(Radius.circular(15.w))),
       child: Center(
         child: Text(
           buttonName,
           style: TextStyle(
-              color: buttonName == "Log In" ? Colors.white : Colors.black,
+              color: buttonName == "Log In" ? AppColors.primaryElementText : AppColors.primarySecondaryElementText,
               fontSize: 18.sp,
               fontWeight: FontWeight.w600),
         ),

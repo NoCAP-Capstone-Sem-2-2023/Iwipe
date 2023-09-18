@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:iwipe/pages/App/AppPage.dart';
 import 'package:iwipe/pages/register/bloc/register_blocs.dart';
 import 'package:iwipe/pages/register/register.dart';
 import 'package:iwipe/pages/signIn/bloc/sign_in_bloc.dart';

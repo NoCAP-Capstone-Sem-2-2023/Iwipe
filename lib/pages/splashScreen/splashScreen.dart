@@ -6,6 +6,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:iwipe/pages/splashScreen/bloc/splashScreen_states.dart';
 import 'package:iwipe/pages/splashScreen/bloc/splashScreen_events.dart';
 
+import '../../common/values/colors.dart';
 import 'bloc/splashScreen_blocs.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -57,7 +58,7 @@ class _SplashScreenState extends State<SplashScreen> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         decorator: DotsDecorator(
                           color: Colors.grey,
-                          activeColor: Colors.blue,
+                          activeColor: AppColors.secondaryElement,
                           size: const Size.square(8.0),
                           activeSize: const Size(18.0, 8.0),
                           activeShape: RoundedRectangleBorder(
@@ -114,7 +115,7 @@ class _SplashScreenState extends State<SplashScreen> {
             height: 50.h,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(15.w),
-              color: Colors.red,
+              color: AppColors.primaryElement,
               boxShadow: [
                 BoxShadow(
                   color: Colors.grey.withOpacity(0.5),
