@@ -11,6 +11,7 @@ import 'package:iwipe/pages/splashScreen/splashScreen.dart';
 import 'package:iwipe/pages/splashScreen/bloc/splashScreen_blocs.dart';
 
 import '../../pages/App/AppPage.dart';
+import '../../pages/App/bloc/appBlocs.dart';
 import '../../pages/signIn/bloc/sign_in_bloc.dart';
 
 class AppPages {
@@ -34,7 +35,12 @@ class AppPages {
           bloc: BlocProvider(
             create: (_) => RegisterBloc(),
           )),
-      //PageEntity(route: AppRoutes.app, page: const AppPage()),
+      PageEntity(
+          route: AppRoutes.app,
+          page: const AppPage(),
+          bloc: BlocProvider(
+            create: (_) => AppBloc(),
+          ))
     ];
   }
 
