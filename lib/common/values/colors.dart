@@ -13,7 +13,7 @@ class AppColors {
   static const Color secondaryElement = Color.fromRGBO(213,235,176, 1);
 
   /// main text color
-  static const Color primaryText = Color.fromRGBO(255, 255, 255, 1);
+  static const Color primaryText = Color.fromRGBO(0, 0, 0, 1);
 
   // video backgroun color
   static const Color primary_bg = Color.fromARGB(210, 32, 47, 62);

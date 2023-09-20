@@ -1,11 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:iwipe/pages/home/homePage.dart';
 
 import '../../common/values/colors.dart';
 
 Widget buildPage(int index) {
-  List<Widget> _widgetOptions = const <Widget>[
-    Center(child: Text("Home")),
+  List<Widget> _widgetOptions = [
+    HomePage(),
     Center(child: Text("Search")),
     Center(child: Text("Course")),
     Center(child: Text("Chat")),
@@ -15,7 +16,7 @@ Widget buildPage(int index) {
   return _widgetOptions[index];
 }
 
-var bottomTabs=[
+var bottomTabs = [
   BottomNavigationBarItem(
     label: "Home",
     icon: SizedBox(
@@ -30,8 +31,7 @@ var bottomTabs=[
         width: 15.w,
         height: 15.h,
         child: Image.asset("assets/icons/home.png",
-            fit: BoxFit.cover,
-            color: AppColors.primaryElement)),
+            fit: BoxFit.cover, color: AppColors.primaryElement)),
   ),
   BottomNavigationBarItem(
     label: "Search",
@@ -47,8 +47,7 @@ var bottomTabs=[
         width: 15.w,
         height: 15.h,
         child: Image.asset("assets/icons/search.png",
-            fit: BoxFit.cover,
-            color: AppColors.primaryElement)),
+            fit: BoxFit.cover, color: AppColors.primaryElement)),
   ),
   BottomNavigationBarItem(
     label: "Course",
@@ -64,8 +63,7 @@ var bottomTabs=[
         width: 15.w,
         height: 15.h,
         child: Image.asset("assets/icons/play-circle1.png",
-            fit: BoxFit.cover,
-            color: AppColors.primaryElement)),
+            fit: BoxFit.cover, color: AppColors.primaryElement)),
   ),
   BottomNavigationBarItem(
     label: "Chat",
@@ -81,8 +79,7 @@ var bottomTabs=[
         width: 15.w,
         height: 15.h,
         child: Image.asset("assets/icons/message-circle.png",
-            fit: BoxFit.cover,
-            color: AppColors.primaryElement)),
+            fit: BoxFit.cover, color: AppColors.primaryElement)),
   ),
   BottomNavigationBarItem(
     label: "Setting",
@@ -98,7 +95,6 @@ var bottomTabs=[
         width: 15.w,
         height: 15.h,
         child: Image.asset("assets/icons/person2.png",
-            fit: BoxFit.cover,
-            color: AppColors.primaryElement)),
+            fit: BoxFit.cover, color: AppColors.primaryElement)),
   )
 ];
