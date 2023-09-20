@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:iwipe/pages/home/homePage.dart';
+import 'package:iwipe/pages/profile/profile.dart';
 
 import '../../common/values/colors.dart';
 
@@ -10,7 +11,7 @@ Widget buildPage(int index) {
     Center(child: Text("Search")),
     Center(child: Text("Course")),
     Center(child: Text("Chat")),
-    Center(child: Text("Profile")),
+    Profile(),
   ];
 
   return _widgetOptions[index];
