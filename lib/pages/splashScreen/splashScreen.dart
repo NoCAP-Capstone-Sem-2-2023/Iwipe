@@ -3,6 +3,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:iwipe/common/values/constant.dart';
+import 'package:iwipe/global.dart';
 import 'package:iwipe/pages/splashScreen/bloc/splashScreen_states.dart';
 import 'package:iwipe/pages/splashScreen/bloc/splashScreen_events.dart';
 
@@ -105,6 +107,8 @@ class _SplashScreenState extends State<SplashScreen> {
               _pageController.animateToPage(index,
                   duration: Duration(milliseconds: 500), curve: Curves.easeIn);
             } else {
+              Global.storageService
+                  .setBool(AppConstant.STORAGE_DEVICE_OPEN_FIRST_TIME, true);
               Navigator.of(context)
                   .pushNamedAndRemoveUntil("/signIn", (route) => false);
             }
