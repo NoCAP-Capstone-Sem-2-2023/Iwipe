@@ -29,4 +29,7 @@ class StorageService {
         ? false
         : true;
   }
+  Future<bool> remove(String key) async {
+    return await _sharedPreferences.remove(key);
+  }
 }

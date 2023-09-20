@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:iwipe/common/routes/routes.dart';
 import 'package:iwipe/common/values/colors.dart';
 
 AppBar buildAppBar() {
@@ -69,12 +70,18 @@ Widget profileDisplayAndEdit() {
   );
 }
 
-Widget profileFeatures() {
+Widget profileFeatures(BuildContext context) {
   return Column(
     children: [
       ...List.generate(
         imagesInfo.length,
         (index) => GestureDetector(
+          onTap: () {
+            String key = imagesInfo.keys.elementAt(index);
+            if (key == "Settings") {
+              Navigator.of(context).pushNamed(AppRoutes.settings);
+            }
+          },
           child: Container(
             margin: EdgeInsets.only(bottom: 15.h),
             child: Row(

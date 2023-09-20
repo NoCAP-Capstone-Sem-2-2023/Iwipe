@@ -23,7 +23,7 @@ class _ProfileState extends State<Profile> {
           profileDisplayAndEdit(),
           Padding(
             padding: EdgeInsets.only(top:15.h ,left: 25.w),
-            child: profileFeatures(),
+            child: profileFeatures(context),
           ),
         ]),
       )),

@@ -1,9 +1,11 @@
 //unify BlocProvider and routes and pages
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:iwipe/common/routes/names.dart';
+import 'package:iwipe/pages/profile/Settings/bloc/settingsBloc.dart';
 import 'package:iwipe/pages/register/bloc/register_blocs.dart';
 import 'package:iwipe/pages/register/register.dart';
 import 'package:iwipe/pages/signIn/signIn.dart';
@@ -13,6 +15,7 @@ import 'package:iwipe/pages/splashScreen/bloc/splashScreen_blocs.dart';
 import '../../global.dart';
 import '../../pages/App/AppPage.dart';
 import '../../pages/App/bloc/appBlocs.dart';
+import '../../pages/profile/Settings/settings.dart';
 import '../../pages/signIn/bloc/sign_in_bloc.dart';
 
 class AppPages {
@@ -41,6 +44,12 @@ class AppPages {
           page: const AppPage(),
           bloc: BlocProvider(
             create: (_) => AppBloc(),
+          )),
+      PageEntity(
+          route: AppRoutes.settings,
+          page: const SettingsPage(),
+          bloc: BlocProvider(
+            create: (_) => SettingsBloc(),
           ))
     ];
   }
