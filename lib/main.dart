@@ -1,16 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:iwipe/pages/App/AppPage.dart';
-import 'package:iwipe/pages/register/bloc/register_blocs.dart';
-import 'package:iwipe/pages/register/register.dart';
-import 'package:iwipe/pages/signIn/bloc/sign_in_bloc.dart';
-import 'package:iwipe/pages/signIn/signIn.dart';
-import 'package:iwipe/pages/splashScreen/bloc/splashScreen_blocs.dart';
-import 'package:iwipe/pages/splashScreen/splashScreen.dart';
-import 'package:iwipe/app_blocs.dart';
 import 'package:firebase_core/firebase_core.dart';
+
+import 'common/routes/routes.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -18,16 +11,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
-      providers: [
-        BlocProvider<AppBlocs>(
-          create: (context) => AppBlocs(),
-        ),
-        BlocProvider<SplashScreenBloc>(
-          create: (context) => SplashScreenBloc(),
-        ),
-        BlocProvider(create: (context) => SignInBloc()),
-        BlocProvider(create: (context) => RegisterBloc())
-      ],
+      providers: [...AppPages.allBlocProviders(context)],
       child: ScreenUtilInit(
           builder: (context, child) => MaterialApp(
                 debugShowCheckedModeBanner: false,
@@ -38,11 +22,7 @@ class MyApp extends StatelessWidget {
                     elevation: 0,
                   ),
                 ),
-                home: const AppPage(),
-                routes: {
-                  "signIn": (context) => const SignIn(),
-                  "register": (context) => const Register(),
-                },
+                onGenerateRoute: AppPages.GenerateRouteSettings,
               )),
     );
   }
