@@ -106,7 +106,7 @@ class _SplashScreenState extends State<SplashScreen> {
                   duration: Duration(milliseconds: 500), curve: Curves.easeIn);
             } else {
               Navigator.of(context)
-                  .pushNamedAndRemoveUntil("signIn", (route) => false);
+                  .pushNamedAndRemoveUntil("/signIn", (route) => false);
             }
           },
           child: Container(

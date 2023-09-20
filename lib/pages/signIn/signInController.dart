@@ -39,6 +39,7 @@ class SignInController {
           if (user != null) {
             // sign in successful
             print('sign in successful');
+            Navigator.of(context).pushNamedAndRemoveUntil('/app',(route) => false);
           }else{
             // sign in failed
           }
