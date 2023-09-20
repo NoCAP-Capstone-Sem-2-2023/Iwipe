@@ -1,7 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:iwipe/common/values/constant.dart';
 
+import '../../global.dart';
 import 'bloc/sign_in_bloc.dart';
 
 class SignInController {
@@ -26,11 +28,11 @@ class SignInController {
           final credential = await FirebaseAuth.instance
               .signInWithEmailAndPassword(
                   email: emailAddress, password: password);
-          if(credential.user == null){
+          if (credential.user == null) {
             //
             print('user is null');
           }
-          if(credential.user!.emailVerified){
+          if (credential.user!.emailVerified) {
             //
             print('email verified');
           }
@@ -38,13 +40,14 @@ class SignInController {
           var user = credential.user;
           if (user != null) {
             // sign in successful
-            print('sign in successful');
-            Navigator.of(context).pushNamedAndRemoveUntil('/app',(route) => false);
-          }else{
+            Global.storageService
+                .setString(AppConstant.STORAGE_USER_TOKEN_KEY, '123');
+            Navigator.of(context)
+                .pushNamedAndRemoveUntil('/app', (route) => false);
+          } else {
             // sign in failed
           }
-
-        }on FirebaseAuthException catch (e) {
+        } on FirebaseAuthException catch (e) {
           if (e.code == 'user-not-found') {
             // user not found
           } else if (e.code == 'wrong-password') {
