@@ -22,7 +22,7 @@ class _SettingsPageState extends State<SettingsPage>
     with SingleTickerProviderStateMixin {
   void logOut() {
     context.read<AppBloc>().add(TriggerAppEvent(0));
-    Global.storageService.remove(AppConstant.STORAGE_USER_TOKEN_KEY);
+    Global.storageService.remove(AppConstant.STORAGE_USER_PROFILE);
     Navigator.of(context)
         .pushNamedAndRemoveUntil('/login', (Route<dynamic> route) => false);
   }

@@ -1,7 +1,10 @@
+import 'dart:convert';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:iwipe/common/values/constant.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 import '../../global.dart';
 import 'bloc/sign_in_bloc.dart';
@@ -40,8 +43,7 @@ class SignInController {
           var user = credential.user;
           if (user != null) {
             // sign in successful
-            Global.storageService
-                .setString(AppConstant.STORAGE_USER_TOKEN_KEY, '123');
+            await storeUserDataFromFirestore(user.uid);
             Navigator.of(context)
                 .pushNamedAndRemoveUntil('/app', (route) => false);
           } else {
@@ -67,5 +69,15 @@ class SignInController {
     } catch (e) {
       print(e);
     }
+  }
+}
+
+Future<void> storeUserDataFromFirestore(String userId) async {
+  CollectionReference users = FirebaseFirestore.instance.collection('users');
+  DocumentSnapshot doc = await users.doc(userId).get();
+  if (doc.exists) {
+    Map<String, dynamic> userData = doc.data() as Map<String, dynamic>;
+    await Global.storageService
+        .setString(AppConstant.STORAGE_USER_PROFILE, jsonEncode(userData));
   }
 }

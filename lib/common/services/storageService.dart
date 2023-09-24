@@ -24,11 +24,12 @@ class StorageService {
   }
 
   bool getIsLogin() {
-    return _sharedPreferences.getString(AppConstant.STORAGE_USER_TOKEN_KEY) ==
+    return _sharedPreferences.getString(AppConstant.STORAGE_USER_PROFILE) ==
             null
         ? false
         : true;
   }
+
   Future<bool> remove(String key) async {
     return await _sharedPreferences.remove(key);
   }

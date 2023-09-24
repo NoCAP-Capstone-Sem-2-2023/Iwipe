@@ -179,3 +179,11 @@ Widget buildButton(String buttonName, bool primary, void Function()? func) {
     ),
   );
 }
+Widget buildLoadingIndicator() {
+  return Container(
+    color: Colors.black.withOpacity(0.5), // You can adjust the opacity
+    child: Center(
+      child: CircularProgressIndicator(),
+    ),
+  );
+}
