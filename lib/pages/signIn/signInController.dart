@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:iwipe/common/values/constant.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -14,7 +15,7 @@ class SignInController {
 
   const SignInController({required this.context});
 
-  Future<void> handleSignIn(String type) async {
+  Future<void> handleSignIn(String type,Function setLoading) async {
     try {
       if (type == 'email') {
         final state = context.read<SignInBloc>().state;
@@ -22,23 +23,22 @@ class SignInController {
         String password = state.password;
 
         if (emailAddress.isEmpty) {
-          print('email is empty');
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text('Please enter your email address')),
+          );
+          return;
         }
         if (password.isEmpty) {
-          print('password is empty');
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text('Please enter your password')),
+          );
+          return;
         }
         try {
           final credential = await FirebaseAuth.instance
               .signInWithEmailAndPassword(
                   email: emailAddress, password: password);
-          if (credential.user == null) {
-            //
-            print('user is null');
-          }
-          if (credential.user!.emailVerified) {
-            //
-            print('email verified');
-          }
+
 
           var user = credential.user;
           if (user != null) {
@@ -62,7 +62,7 @@ class SignInController {
             // user disabled
             print('user disabled');
           } else {
-            // unknown error
+
           }
         }
       }
