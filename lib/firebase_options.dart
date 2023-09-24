@@ -44,40 +44,38 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyAUTJsWp32VQcE4O0BYfOahKezlqDxq3u8',
-    appId: '1:927628137875:web:16aabfc7613f8e4e928466',
-    messagingSenderId: '927628137875',
-    projectId: 'iwipe-40df6',
-    authDomain: 'iwipe-40df6.firebaseapp.com',
-    storageBucket: 'iwipe-40df6.appspot.com',
-    measurementId: 'G-FZY45JFMMH',
+    apiKey: 'AIzaSyCXqhSqwu0VNwAHTGnNL5WPSKlG9HEDd6w',
+    appId: '1:383936808056:web:b38d9fd3b0daa2a330598d',
+    messagingSenderId: '383936808056',
+    projectId: 'iwipe-4d9bb',
+    authDomain: 'iwipe-4d9bb.firebaseapp.com',
+    storageBucket: 'iwipe-4d9bb.appspot.com',
+    measurementId: 'G-657D30HQ8N',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyCgyu0qJ9NQz9HkzoPsrBwK7TtCXLMaavQ',
-    appId: '1:927628137875:android:b789789ac8d6e1c9928466',
-    messagingSenderId: '927628137875',
-    projectId: 'iwipe-40df6',
-    storageBucket: 'iwipe-40df6.appspot.com',
+    apiKey: 'AIzaSyCwlBmNwVBlaPbCSXvGFkF2SXgHVJa_hkE',
+    appId: '1:383936808056:android:cb025f6189f3333330598d',
+    messagingSenderId: '383936808056',
+    projectId: 'iwipe-4d9bb',
+    storageBucket: 'iwipe-4d9bb.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyAbRspWWdfsGH2DjHoEhYkOOUClqTT8v58',
-    appId: '1:927628137875:ios:97b22cf77c6fa1fc928466',
-    messagingSenderId: '927628137875',
-    projectId: 'iwipe-40df6',
-    storageBucket: 'iwipe-40df6.appspot.com',
-    iosClientId: '927628137875-pcl6l5rvut0uenvj0nd38m9o9sr2drrf.apps.googleusercontent.com',
+    apiKey: 'AIzaSyAPIeR1_WCTPcNAI4j7JRrKQgx73vBmUiY',
+    appId: '1:383936808056:ios:139c901ff0ada8d430598d',
+    messagingSenderId: '383936808056',
+    projectId: 'iwipe-4d9bb',
+    storageBucket: 'iwipe-4d9bb.appspot.com',
     iosBundleId: 'com.iwipe.iwipe',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyAbRspWWdfsGH2DjHoEhYkOOUClqTT8v58',
-    appId: '1:927628137875:ios:f11ba6592a876e2a928466',
-    messagingSenderId: '927628137875',
-    projectId: 'iwipe-40df6',
-    storageBucket: 'iwipe-40df6.appspot.com',
-    iosClientId: '927628137875-p6aesl5eo93c2f7uu53uid4p8cf9rihk.apps.googleusercontent.com',
+    apiKey: 'AIzaSyAPIeR1_WCTPcNAI4j7JRrKQgx73vBmUiY',
+    appId: '1:383936808056:ios:d54a7fc55bd7433d30598d',
+    messagingSenderId: '383936808056',
+    projectId: 'iwipe-4d9bb',
+    storageBucket: 'iwipe-4d9bb.appspot.com',
     iosBundleId: 'com.iwipe.iwipe.RunnerTests',
   );
 }

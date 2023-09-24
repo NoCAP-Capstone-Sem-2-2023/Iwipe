@@ -1,11 +1,9 @@
 //unify BlocProvider and routes and pages
 
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:iwipe/common/routes/names.dart';
-import 'package:iwipe/pages/profile/Settings/bloc/settingsBloc.dart';
 import 'package:iwipe/pages/register/bloc/register_blocs.dart';
 import 'package:iwipe/pages/register/register.dart';
 import 'package:iwipe/pages/signIn/signIn.dart';
@@ -15,7 +13,10 @@ import 'package:iwipe/pages/splashScreen/bloc/splashScreen_blocs.dart';
 import '../../global.dart';
 import '../../pages/App/AppPage.dart';
 import '../../pages/App/bloc/appBlocs.dart';
+import '../../pages/profile/Settings/bloc/settingsBloc.dart';
 import '../../pages/profile/Settings/settings.dart';
+import '../../pages/setUpProfile/bloc/setUpProfileBloc.dart';
+import '../../pages/setUpProfile/setUpProfile.dart';
 import '../../pages/signIn/bloc/sign_in_bloc.dart';
 
 class AppPages {
@@ -50,6 +51,12 @@ class AppPages {
           page: const SettingsPage(),
           bloc: BlocProvider(
             create: (_) => SettingsBloc(),
+          )),
+      PageEntity(
+          route: AppRoutes.profileSetup,
+          page: const SetUpProfile(),
+          bloc: BlocProvider(
+            create: (_) => SetupProfileBloc(),
           ))
     ];
   }
@@ -66,6 +73,9 @@ class AppPages {
     if (settings.name != null) {
       var result = routes().where((element) => element.route == settings.name);
       if (result.isNotEmpty) {
+
+
+
         //If user already open the app before, then go to sign in page
         bool deviceFirstOpen = Global.storageService.getDeviceOpenFirstTime();
         if (result.first.route == AppRoutes.initial && deviceFirstOpen) {
@@ -79,9 +89,10 @@ class AppPages {
               builder: (_) => const SignIn(), settings: settings);
         }
 
-        return MaterialPageRoute(
+         return MaterialPageRoute(
             builder: (_) => result.first.page, settings: settings);
       }
+
     }
     return MaterialPageRoute(
         builder: (_) => const SignIn(), settings: settings);

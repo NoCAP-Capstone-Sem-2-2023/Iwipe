@@ -1,43 +1,26 @@
 {
   "project_info": {
-    "project_number": "927628137875",
-    "project_id": "iwipe-40df6",
-    "storage_bucket": "iwipe-40df6.appspot.com"
+    "project_number": "383936808056",
+    "project_id": "iwipe-4d9bb",
+    "storage_bucket": "iwipe-4d9bb.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:927628137875:android:b789789ac8d6e1c9928466",
+        "mobilesdk_app_id": "1:383936808056:android:cb025f6189f3333330598d",
         "android_client_info": {
           "package_name": "com.iwipe.iwipe"
         }
       },
-      "oauth_client": [
-        {
-          "client_id": "927628137875-v76evipjv34a346tth6lduve4dpr4edv.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
+      "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyCgyu0qJ9NQz9HkzoPsrBwK7TtCXLMaavQ"
+          "current_key": "AIzaSyCwlBmNwVBlaPbCSXvGFkF2SXgHVJa_hkE"
         }
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "927628137875-v76evipjv34a346tth6lduve4dpr4edv.apps.googleusercontent.com",
-              "client_type": 3
-            },
-            {
-              "client_id": "927628137875-pcl6l5rvut0uenvj0nd38m9o9sr2drrf.apps.googleusercontent.com",
-              "client_type": 2,
-              "ios_info": {
-                "bundle_id": "com.iwipe.iwipe"
-              }
-            }
-          ]
+          "other_platform_oauth_client": []
         }
       }
     }

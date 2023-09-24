@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:iwipe/pages/register/registerController.dart';
 
 import '../commonWidget.dart';
+import '../setUpProfile/setUpProfile.dart';
 import 'bloc/register_blocs.dart';
 import 'bloc/register_event.dart';
 import 'bloc/register_state.dart';
@@ -58,8 +59,8 @@ class _RegisterState extends State<Register> {
                           }),
                         ],
                       )),
-                  buildButton("Register",true, () {
-                    RegisterController(context:context).handleEmailReg();
+                  buildButton("Next",true, () {
+                    RegisterController(context:context).passingValueToSetup();
                   })
                 ],
               ),

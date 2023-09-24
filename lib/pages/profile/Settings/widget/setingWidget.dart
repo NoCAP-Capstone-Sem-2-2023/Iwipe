@@ -32,7 +32,7 @@ Widget SettingBTN(BuildContext context, void Function()? func) {
                       Navigator.pop(context);
                     },
                     child: Text("No")),
-                TextButton(onPressed: () => func, child: Text("Yes")),
+                TextButton(onPressed: () => func!(), child: Text("Yes")),
               ],
             );
           });
