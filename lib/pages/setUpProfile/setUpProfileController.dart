@@ -138,7 +138,8 @@ class SetUpProfileController {
     }
     //reset route to home screen
     if (Navigator.canPop(context)) {
-      Navigator.of(context).pushNamedAndRemoveUntil();
+      Navigator.of(context).popUntil((route) => route.isFirst);
+
     }
   }
 
