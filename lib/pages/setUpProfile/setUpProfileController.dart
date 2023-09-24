@@ -16,8 +16,17 @@ class SetUpProfileController {
 
   const SetUpProfileController({required this.context});
 
-  Future<void> handleEmailReg(String username, String email, String password,
-      String? selectedImagePath) async {
+  Future<void> handleEmailReg(
+      String username,
+      String email,
+      String password,
+      String? selectedImagePath,
+      Function setLoading,
+      Function isMounted) async {
+    // Show loading indicator
+    if (isMounted()) {
+      setLoading(true);
+    }
     final state = context.read<SetupProfileBloc>().state;
 
     String firstName = state.firstName;
@@ -99,7 +108,6 @@ class SetUpProfileController {
           const SnackBar(
               content: Text('Please check your email to verify your account')),
         );
-        Navigator.of(context).pop();
       }
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
@@ -124,8 +132,14 @@ class SetUpProfileController {
       print("Failed to create user in Moodle: $e");
     }
 
+    // Hide loading indicator
+    if (isMounted()) {
+      setLoading(false);
+    }
     //reset route to home screen
-    Navigator.of(context).pop();
+    if (Navigator.canPop(context)) {
+      Navigator.of(context).pushNamedAndRemoveUntil();
+    }
   }
 
   Future<void> createUserInMoodle(String username, String password,
@@ -149,7 +163,7 @@ class SetUpProfileController {
 
     if (response.statusCode == 200) {
       var jsonResponse = jsonDecode(response.body);
-      if (jsonResponse.containsKey('exception')) {
+      if (jsonResponse is Map && jsonResponse.containsKey('exception')) {
         print("Moodle exception: ${jsonResponse['message']}");
       } else {
         print("User created in Moodle: $jsonResponse");

@@ -23,6 +23,7 @@ class SetUpProfile extends StatefulWidget {
 
 class _setUpProfileState extends State<SetUpProfile> {
   String? selectedImagePath;
+  bool isLoading = false;
 
   Future<void> _pickImage() async {
     final ImagePicker _picker = ImagePicker();
@@ -76,98 +77,106 @@ class _setUpProfileState extends State<SetUpProfile> {
 
     return BlocBuilder<SetupProfileBloc, SetUpProfileState>(
         builder: (context, state) {
-      return Container(
-        color: const Color.fromRGBO(241, 241, 241, 1),
-        child: SafeArea(
-          child: Scaffold(
-            backgroundColor: Color.fromRGBO(241, 241, 241, 1),
-            appBar: buildAppBar("Register"),
-            body: SingleChildScrollView(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Center(
-                    child: Container(
-                        margin: EdgeInsets.only(top: 20.h),
-                        child: reusableText(
-                            "Enter details to complete create an account")),
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      _requestPermission();
-                    },
-                    child: Container(
-                        margin: EdgeInsets.only(top: 20.h),
-                        child: Center(
-                          child: Container(
-                            width: 130.w,
-                            height: 130.h,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10.w),
-                              image: DecorationImage(
-                                image: selectedImagePath != null
-                                    ? FileImage(File(selectedImagePath!))
-                                        as ImageProvider<Object>
-                                    : AssetImage("assets/icons/headpic.png")
-                                        as ImageProvider<Object>,
+      return Stack(children: [
+        Container(
+          color: const Color.fromRGBO(241, 241, 241, 1),
+          child: SafeArea(
+            child: Scaffold(
+              backgroundColor: Color.fromRGBO(241, 241, 241, 1),
+              appBar: buildAppBar("Register"),
+              body: SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Center(
+                      child: Container(
+                          margin: EdgeInsets.only(top: 20.h),
+                          child: reusableText(
+                              "Enter details to complete create an account")),
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        _requestPermission();
+                      },
+                      child: Container(
+                          margin: EdgeInsets.only(top: 20.h),
+                          child: Center(
+                            child: Container(
+                              width: 130.w,
+                              height: 130.h,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10.w),
+                                image: DecorationImage(
+                                  image: selectedImagePath != null
+                                      ? FileImage(File(selectedImagePath!))
+                                          as ImageProvider<Object>
+                                      : AssetImage("assets/icons/headpic.png")
+                                          as ImageProvider<Object>,
+                                ),
                               ),
-                            ),
-                            child: Align(
-                              alignment: Alignment.bottomRight,
-                              child: Padding(
-                                padding: EdgeInsets.only(right: 6.w),
-                                child: Container(
-                                  width: 25.w,
-                                  height: 25.h,
-                                  decoration: BoxDecoration(
-                                    color: AppColors.primaryElement,
-                                    // Setting red background color
-                                    borderRadius: BorderRadius.circular(5.w),
-                                  ),
-                                  child: Image(
-                                    image:
-                                        AssetImage("assets/icons/edit 2.png"),
+                              child: Align(
+                                alignment: Alignment.bottomRight,
+                                child: Padding(
+                                  padding: EdgeInsets.only(right: 6.w),
+                                  child: Container(
+                                    width: 25.w,
+                                    height: 25.h,
+                                    decoration: BoxDecoration(
+                                      color: AppColors.primaryElement,
+                                      // Setting red background color
+                                      borderRadius: BorderRadius.circular(5.w),
+                                    ),
+                                    child: Image(
+                                      image:
+                                          AssetImage("assets/icons/edit 2.png"),
+                                    ),
                                   ),
                                 ),
                               ),
                             ),
-                          ),
+                          )),
+                    ),
+                    Container(
+                        margin: EdgeInsets.only(top: 20.h),
+                        padding: EdgeInsets.only(left: 25.w, right: 25.w),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            reusableText("First Name"),
+                            buildTextField(
+                                "Enter Your First name", "firstName", "user",
+                                (value) {
+                              context
+                                  .read<SetupProfileBloc>()
+                                  .add(RegisterFirstnameChanged(value));
+                            }),
+                            reusableText("Last Name"),
+                            buildTextField(
+                                "Enter Your Last Name", "lastName", "user",
+                                (value) {
+                              context
+                                  .read<SetupProfileBloc>()
+                                  .add(RegisterLastNameChanged(value));
+                            }),
+                          ],
                         )),
-                  ),
-                  Container(
-                      margin: EdgeInsets.only(top: 20.h),
-                      padding: EdgeInsets.only(left: 25.w, right: 25.w),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          reusableText("First Name"),
-                          buildTextField(
-                              "Enter Your First name", "firstName", "user",
-                              (value) {
-                            context
-                                .read<SetupProfileBloc>()
-                                .add(RegisterFirstnameChanged(value));
-                          }),
-                          reusableText("Last Name"),
-                          buildTextField(
-                              "Enter Your Last Name", "lastName", "user",
-                              (value) {
-                            context
-                                .read<SetupProfileBloc>()
-                                .add(RegisterLastNameChanged(value));
-                          }),
-                        ],
-                      )),
-                  buildButton("Next", true, () {
-                    SetUpProfileController(context: context).handleEmailReg(
-                        username, email, password, selectedImagePath);
-                  })
-                ],
+                    buildButton("Next", true, () {
+                      SetUpProfileController(context: context).handleEmailReg(
+                          username, email, password, selectedImagePath,
+                          (bool value) {
+                        setState(() {
+                          isLoading = value;
+                        });
+                      }, () => mounted);
+                    })
+                  ],
+                ),
               ),
             ),
           ),
         ),
-      );
+        isLoading ? buildLoadingIndicator() : Container(),
+      ]);
     });
   }
 }
