@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-AppBar buildAppBar() {
+AppBar buildAppBar(String? linkAvt) {
   return AppBar(
     backgroundColor: Colors.white,
     title: Container(
@@ -22,7 +22,8 @@ AppBar buildAppBar() {
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 image: DecorationImage(
-                  image: AssetImage("assets/icons/person.png"),
+                  image: NetworkImage(linkAvt ??
+                      "https://firebasestorage.googleapis.com/v0/b/iwipe-4d9bb.appspot.com/o/avatars%2FavtCat.jpeg?alt=media&token=80b5a3e8-daee-4e95-baf7-7c0a4fe60c29"),
                 ),
               ),
             ),

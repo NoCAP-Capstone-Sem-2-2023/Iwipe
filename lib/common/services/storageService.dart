@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:iwipe/common/values/constant.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -24,11 +26,21 @@ class StorageService {
   }
 
   bool getIsLogin() {
-    return _sharedPreferences.getString(AppConstant.STORAGE_USER_TOKEN_KEY) ==
+    return _sharedPreferences.getString(AppConstant.STORAGE_USER_PROFILE) ==
             null
         ? false
         : true;
   }
+
+  Map<String, dynamic>? getUserProfile() {
+    String? userProfile =
+        _sharedPreferences.getString(AppConstant.STORAGE_USER_PROFILE);
+    if (userProfile == null) {
+      return null;
+    }
+    return Map<String, dynamic>.from(jsonDecode(userProfile));
+  }
+
   Future<bool> remove(String key) async {
     return await _sharedPreferences.remove(key);
   }

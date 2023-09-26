@@ -40,14 +40,14 @@ var imagesInfo = <String, String>{
 };
 
 //Profile IMG and edit
-Widget profileDisplayAndEdit() {
+Widget profileDisplayAndEdit(String? linkAvt) {
   return Container(
     width: 80.w,
     height: 80.h,
     decoration: BoxDecoration(
       borderRadius: BorderRadius.circular(10.w),
       image: DecorationImage(
-        image: AssetImage("assets/icons/headpic.png"),
+        image: NetworkImage(linkAvt ?? "https://firebasestorage.googleapis.com/v0/b/iwipe-4d9bb.appspot.com/o/avatars%2FavtCat.jpeg?alt=media&token=80b5a3e8-daee-4e95-baf7-7c0a4fe60c29"),
       ),
     ),
     child: Align(

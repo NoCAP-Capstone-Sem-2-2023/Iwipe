@@ -17,59 +17,81 @@ class SignIn extends StatefulWidget {
 }
 
 class _SignInState extends State<SignIn> {
+  bool isLoading = false;
+
+  setLoading(bool value) {
+    setState(() {
+      isLoading = value;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<SignInBloc, SignInState>(builder: (context, state) {
-      return Container(
-        color: const Color.fromRGBO(241, 241, 241, 1),
-        child: SafeArea(
-          child: Scaffold(
-            backgroundColor: Color.fromRGBO(241, 241, 241, 1),
-            appBar: buildAppBar("Log In"),
-            body: SingleChildScrollView(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  buildThirdPartyLogin(context),
-                  Center(
-                      child:
-                          reusableText("Or use your email address to Login")),
-                  Container(
-                      margin: EdgeInsets.only(top: 20.h),
-                      padding: EdgeInsets.only(left: 25.w, right: 25.w),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          reusableText("Email Address"),
-                          buildTextField("Enter Email Address", "email", "user",
-                              (value) {
-                            context
-                                .read<SignInBloc>()
-                                .add(SignInEmailChanged(value));
-                          }),
-                          reusableText("Password"),
-                          buildTextField(
-                              "Enter Your Password", "password", "lock",
-                              (value) {
-                            context
-                                .read<SignInBloc>()
-                                .add(SignInPasswordChanged(value));
-                          }),
-                        ],
-                      )),
-                  forgotPassword(),
-                  buildButton("Log In",true, () {
-                    print('Log In');
-                    SignInController(context: context).handleSignIn("email");
-                  }),
-                  buildButton("Register",false, () {
-                    Navigator.of(context).pushNamed("/register");
-                  })
-                ],
+      return Stack(
+        children: [
+          Container(
+            color: const Color.fromRGBO(241, 241, 241, 1),
+            child: SafeArea(
+              child: Scaffold(
+                backgroundColor: Color.fromRGBO(241, 241, 241, 1),
+                appBar: buildAppBar("Log In"),
+                body: SingleChildScrollView(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      buildThirdPartyLogin(context),
+                      Center(
+                          child: reusableText(
+                              "Or use your email address to Login")),
+                      Container(
+                          margin: EdgeInsets.only(top: 20.h),
+                          padding: EdgeInsets.only(left: 25.w, right: 25.w),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              reusableText("Email Address"),
+                              buildTextField(
+                                  "Enter Email Address", "email", "user",
+                                  (value) {
+                                context
+                                    .read<SignInBloc>()
+                                    .add(SignInEmailChanged(value));
+                              }),
+                              reusableText("Password"),
+                              buildTextField(
+                                  "Enter Your Password", "password", "lock",
+                                  (value) {
+                                context
+                                    .read<SignInBloc>()
+                                    .add(SignInPasswordChanged(value));
+                              }),
+                            ],
+                          )),
+                      forgotPassword(),
+                      buildButton(
+                        "Log In",
+                        true,
+                        () {
+                          SignInController(context: context)
+                              .handleSignIn("email", (bool value) {
+                            setState(() {
+                              isLoading = value;
+                            });
+                          });
+                        },
+                      ),
+                      buildButton("Register", false, () {
+                        Navigator.of(context).pushNamed("/register");
+                      })
+                    ],
+                  ),
+                ),
               ),
             ),
           ),
-        ),
+          isLoading ? buildLoadingIndicator() : Container(),
+        ],
       );
     });
   }

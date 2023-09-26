@@ -33,6 +33,8 @@ class SetUpProfileController {
     String lastName = state.lastName;
     String avt = state.avt;
 
+    String? userId;
+
     if (firstName.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Please enter your first name')),
@@ -68,33 +70,6 @@ class SetUpProfileController {
       }
     }
 
-    CollectionReference users = FirebaseFirestore.instance.collection('users');
-    try {
-      await users.add({
-        'avatar': downloadURL,
-        'username': username,
-        'email': email,
-        'firstName': state.firstName,
-        'lastName': state.lastName,
-        'type': 'Email',
-        'openId': 'None',
-      });
-
-      // Store user data locally
-      await storeUserData({
-        'avatar': downloadURL,
-        'username': username,
-        'email': email,
-        'firstName': state.firstName,
-        'lastName': state.lastName,
-        'type': 'Email',
-        'openId': 'None',
-      });
-    } catch (e) {
-      print("Failed to add user to Firestore: $e");
-      // Handle the error
-    }
-
     try {
       final credential =
           await FirebaseAuth.instance.createUserWithEmailAndPassword(
@@ -102,6 +77,7 @@ class SetUpProfileController {
         password: password,
       );
       if (credential.user != null) {
+        userId = credential.user!.uid;
         await credential.user!.updateDisplayName(username);
         await credential.user!.sendEmailVerification();
         ScaffoldMessenger.of(context).showSnackBar(
@@ -126,6 +102,33 @@ class SetUpProfileController {
       }
     }
 
+    CollectionReference users = FirebaseFirestore.instance.collection('users');
+    try {
+      await users.doc(userId).set({
+        'avatar': downloadURL,
+        'username': username,
+        'email': email,
+        'firstName': state.firstName,
+        'lastName': state.lastName,
+        'type': 'Email',
+        'openId': 'None',
+      });
+
+// Store user data locally
+      await storeUserData({
+        'avatar': downloadURL,
+        'username': username,
+        'email': email,
+        'firstName': state.firstName,
+        'lastName': state.lastName,
+        'type': 'Email',
+        'openId': 'None',
+      });
+    } catch (e) {
+      print("Failed to add user to Firestore: $e");
+// Handle the error
+    }
+
     try {
       await createUserInMoodle(username, password, firstName, lastName, email);
     } catch (e) {
@@ -139,7 +142,6 @@ class SetUpProfileController {
     //reset route to home screen
     if (Navigator.canPop(context)) {
       Navigator.of(context).popUntil((route) => route.isFirst);
-
     }
   }
 
