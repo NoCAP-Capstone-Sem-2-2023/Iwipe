@@ -165,13 +165,16 @@ Widget buildButton(String buttonName, bool primary, void Function()? func) {
           top: buttonName == "Log In" ? 40.h : 0.h,
           bottom: 10.h),
       decoration: BoxDecoration(
-          color: primary ? AppColors.primaryElement : AppColors.secondaryElement,
+          color:
+              primary ? AppColors.primaryElement : AppColors.secondaryElement,
           borderRadius: BorderRadius.all(Radius.circular(15.w))),
       child: Center(
         child: Text(
           buttonName,
           style: TextStyle(
-              color: buttonName == "Log In" ? AppColors.primaryElementText : AppColors.primarySecondaryElementText,
+              color: buttonName == "Log In"
+                  ? AppColors.primaryElementText
+                  : AppColors.primarySecondaryElementText,
               fontSize: 18.sp,
               fontWeight: FontWeight.w600),
         ),
@@ -184,6 +187,36 @@ Widget buildLoadingIndicator() {
     color: Colors.black.withOpacity(0.5), // You can adjust the opacity
     child: Center(
       child: CircularProgressIndicator(),
+    ),
+  );
+}
+
+Widget buildSecondaryButtonWithSize(
+    String buttonName, int size, bool primary, void Function()? func) {
+  return GestureDetector(
+    onTap: () {
+      func?.call(); // Use func?.call() to invoke the function if it's not null
+    },
+    child: Container(
+      width: 325.w,
+      height: 50.h,
+      margin: EdgeInsets.only(
+          left: 25.w,
+          right: 25.w,
+          top: buttonName == "Log In" ? 40.h : 0.h,
+          bottom: 10.h),
+      decoration: BoxDecoration(
+          color: AppColors.secondaryElement,
+          borderRadius: BorderRadius.all(Radius.circular(15.w))),
+      child: Center(
+        child: Text(
+          buttonName,
+          style: TextStyle(
+              color: Colors.black.withOpacity(0.8),
+              fontSize: size.sp,
+              fontWeight: FontWeight.w600),
+        ),
+      ),
     ),
   );
 }

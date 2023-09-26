@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:iwipe/pages/setUpProfile/setUpProfileController.dart';
-import 'package:iwipe/pages/setUpProfile/setUpProfileWidget.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:iwipe/pages/setUpProfile/setUpProfileWidget.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 import '../../common/values/colors.dart';
