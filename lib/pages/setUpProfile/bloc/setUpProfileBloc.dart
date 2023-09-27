@@ -15,19 +15,16 @@ class SetupProfileBloc extends Bloc<SetUpProfileEvent, SetUpProfileState> {
    }
 
   void _onFirstNameChanged(RegisterFirstnameChanged event, Emitter<SetUpProfileState> emit) {
-    print("${event.firstName}");
     emit(state.copyWith(firstName: event.firstName));
 
   }
 
   void _onLastNameChanged(RegisterLastNameChanged event, Emitter<SetUpProfileState> emit) {
-    print("${event.lastName}");
 
     emit(state.copyWith(lastName: event.lastName));
   }
 
   void _onAVTChanged(RegisterAVTChanged event, Emitter<SetUpProfileState> emit) {
-    print("${event.avt}");
     emit(state.copyWith(avt: event.avt));
   }
 }

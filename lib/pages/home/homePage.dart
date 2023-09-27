@@ -13,6 +13,8 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   String? username;
   String? linkAvt;
+  String? IDValidation;
+  String? paymentStatus;
 
   @override
   void initState() {
@@ -22,14 +24,19 @@ class _HomePageState extends State<HomePage> {
 
   _loadUser() async {
     Map<String, dynamic>? userProfile = Global.storageService.getUserProfile();
-    print(userProfile);
     setState(() {
       username = userProfile?['username'];
       linkAvt = userProfile?['avatar'];
+      IDValidation = userProfile?['IDValidation'];
+      paymentStatus = userProfile?['paymentStatus'];
     });
   }
 
   Widget build(BuildContext context) {
+    print("username: $username");
+    print("linkAvt: $linkAvt");
+    print("IDValidation: $IDValidation");
+    print("paymentStatus: $paymentStatus");
     return Scaffold(
       appBar: buildAppBar(linkAvt),
       backgroundColor: Colors.white,
@@ -60,6 +67,51 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
             ),
+            SizedBox(height: 30.h),
+            // Check if user has validated ID
+            IDValidation != "Validated"
+                ? Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "You have not validated your ID yet.",
+                        style: TextStyle(
+                          fontSize: 16.sp,
+                          fontWeight: FontWeight.w400,
+                          color: AppColors.primaryText,
+                        ),
+                      ),
+                      ElevatedButton(
+                        onPressed: () {
+                          Navigator.pushNamed(context, '/idValidation');
+                        },
+                        child: Text("Validate ID"),
+                      ),
+                    ],
+                  )
+                : Container(),
+            // Check if user has made a payment
+            paymentStatus != "Paid"
+                ? Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "You have not made a payment yet.",
+                        style: TextStyle(
+                          fontSize: 16.sp,
+                          fontWeight: FontWeight.w400,
+                          color: AppColors.primaryText,
+                        ),
+                      ),
+                      ElevatedButton(
+                        onPressed: () {
+                          Navigator.pushNamed(context, '/payment');
+                        },
+                        child: Text("Make Payment"),
+                      ),
+                    ],
+                  )
+                : Container(),
           ],
         ),
       ),

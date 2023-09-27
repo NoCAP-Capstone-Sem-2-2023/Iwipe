@@ -48,14 +48,6 @@ class SetUpProfileController {
       return;
     }
 
-    //print all for debug
-    print('username: $username');
-    print('email: $email');
-    print('password: $password');
-    print('firstName: $firstName');
-    print('lastName: $lastName');
-    print('avt: $avt');
-
     String? downloadURL;
     if (selectedImagePath != null) {
       File file = File(selectedImagePath);
@@ -112,27 +104,14 @@ class SetUpProfileController {
         'lastName': state.lastName,
         'type': 'Email',
         'openId': 'None',
-      });
-
-// Store user data locally
-      await storeUserData({
-        'avatar': downloadURL,
-        'username': username,
-        'email': email,
-        'firstName': state.firstName,
-        'lastName': state.lastName,
-        'type': 'Email',
-        'openId': 'None',
+        'IDValidation': "",
+        'paymentStatus': 'Not Paid',
+        'moodleID': "",
+        'password': password,
       });
     } catch (e) {
       print("Failed to add user to Firestore: $e");
 // Handle the error
-    }
-
-    try {
-      await createUserInMoodle(username, password, firstName, lastName, email);
-    } catch (e) {
-      print("Failed to create user in Moodle: $e");
     }
 
     // Hide loading indicator
@@ -144,41 +123,4 @@ class SetUpProfileController {
       Navigator.of(context).popUntil((route) => route.isFirst);
     }
   }
-
-  Future<void> createUserInMoodle(String username, String password,
-      String firstName, String lastName, String email) async {
-    final String token = AppConstant.MasterAPITOKEN;
-    final String domain = AppConstant.domain;
-    final String functionName = "core_user_create_users";
-
-    final String url = "$domain/webservice/rest/server.php";
-
-    final response = await http.post(Uri.parse(url), body: {
-      'wstoken': token,
-      'wsfunction': functionName,
-      'moodlewsrestformat': 'json',
-      'users[0][username]': username,
-      'users[0][password]': password,
-      'users[0][firstname]': firstName,
-      'users[0][lastname]': lastName,
-      'users[0][email]': email,
-    });
-
-    if (response.statusCode == 200) {
-      var jsonResponse = jsonDecode(response.body);
-      if (jsonResponse is Map && jsonResponse.containsKey('exception')) {
-        print("Moodle exception: ${jsonResponse['message']}");
-      } else {
-        print("User created in Moodle: $jsonResponse");
-      }
-    } else {
-      print("Failed to create user in Moodle: ${response.body}");
-    }
-  }
-}
-
-Future<bool> storeUserData(Map<String, dynamic> userData) async {
-  await Global.storageService
-      .setString(AppConstant.STORAGE_USER_PROFILE, jsonEncode(userData));
-  return true;
 }

@@ -15,7 +15,7 @@ class SignInController {
 
   const SignInController({required this.context});
 
-  Future<void> handleSignIn(String type,Function setLoading) async {
+  Future<void> handleSignIn(String type, Function setLoading) async {
     try {
       if (type == 'email') {
         final state = context.read<SignInBloc>().state;
@@ -34,16 +34,18 @@ class SignInController {
           );
           return;
         }
+        setLoading(true);
         try {
           final credential = await FirebaseAuth.instance
               .signInWithEmailAndPassword(
                   email: emailAddress, password: password);
 
-
           var user = credential.user;
           if (user != null) {
             // sign in successful
             await storeUserDataFromFirestore(user.uid);
+            await storeUserID();
+            setLoading(false);
             Navigator.of(context)
                 .pushNamedAndRemoveUntil('/app', (route) => false);
           } else {
@@ -61,9 +63,7 @@ class SignInController {
           } else if (e.code == 'user-disabled') {
             // user disabled
             print('user disabled');
-          } else {
-
-          }
+          } else {}
         }
       }
     } catch (e) {
@@ -79,5 +79,15 @@ Future<void> storeUserDataFromFirestore(String userId) async {
     Map<String, dynamic> userData = doc.data() as Map<String, dynamic>;
     await Global.storageService
         .setString(AppConstant.STORAGE_USER_PROFILE, jsonEncode(userData));
+  }
+}
+
+Future<void> storeUserID() async {
+  User? currentUser = FirebaseAuth.instance.currentUser;
+  if (currentUser != null) {
+    String userId = currentUser.uid;
+    await Global.storageService.setString(AppConstant.STORAGE_USER_ID, userId);
+  } else {
+    print("No current user found.");
   }
 }

@@ -14,24 +14,20 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
   }
 
   void _onUsernameChanged(RegisterUsernameChanged event, Emitter<RegisterState> emit) {
-    print("${event.username}");
     emit(state.copyWith(username: event.username));
 
   }
 
   void _onEmailChanged(RegisterEmailChanged event, Emitter<RegisterState> emit) {
-    print("${event.email}");
 
     emit(state.copyWith(email: event.email));
   }
 
   void _onPasswordChanged(RegisterPasswordChanged event, Emitter<RegisterState> emit) {
-    print("${event.password}");
     emit(state.copyWith(password: event.password));
   }
 
   void _onConfirmPasswordChanged(RegisterConfirmPasswordChanged event, Emitter<RegisterState> emit) {
-    print("${event.confirmPassword}");
     emit(state.copyWith(confirmPassword: event.confirmPassword));
   }
 }
