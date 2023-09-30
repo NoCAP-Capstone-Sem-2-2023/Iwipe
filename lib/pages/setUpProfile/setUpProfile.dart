@@ -37,33 +37,50 @@ class _setUpProfileState extends State<SetUpProfile> {
   }
 
   Future<void> _requestPermission() async {
-    PermissionStatus status = await Permission.photos.request();
+    print("ask");
 
-    if (status.isGranted) {
+    PermissionStatus? readStatus;
+    PermissionStatus? writeStatus;
+
+    if (Platform.isIOS) {
+      readStatus = await Permission.photos.request();
+      writeStatus = await Permission.mediaLibrary.request();
+    } else if (Platform.isAndroid) {
+      readStatus = await Permission.storage.request();
+      writeStatus = readStatus; // On Android, storage permission covers both read and write
+    }
+
+    print(writeStatus);
+    print(readStatus);
+    print(Platform.isAndroid);
+    if (readStatus?.isGranted == true && writeStatus?.isGranted == true) {
       _pickImage();
-    } else if (status.isDenied || status.isPermanentlyDenied) {
+    } else if (readStatus?.isDenied == true ||
+        readStatus?.isPermanentlyDenied == true ||
+        writeStatus?.isDenied == true ||
+        writeStatus?.isPermanentlyDenied == true) {
       showDialog(
           context: context,
           builder: (BuildContext context) => CupertinoAlertDialog(
-                title: Text('Permissions error'),
-                content:
-                    Text('Please enable permissions from settings to continue'),
-                actions: <Widget>[
-                  CupertinoDialogAction(
-                    child: Text('Cancel'),
-                    onPressed: () => Navigator.of(context).pop(),
-                  ),
-                  CupertinoDialogAction(
-                    child: Text('Open Settings'),
-                    onPressed: () {
-                      openAppSettings();
-                      Navigator.of(context).pop();
-                    },
-                  ),
-                ],
-              ));
+            title: Text('Permissions error'),
+            content: Text('Please enable permissions from settings to continue'),
+            actions: <Widget>[
+              CupertinoDialogAction(
+                child: Text('Cancel'),
+                onPressed: () => Navigator.of(context).pop(),
+              ),
+              CupertinoDialogAction(
+                child: Text('Open Settings'),
+                onPressed: () {
+                  openAppSettings();
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          ));
     }
   }
+
 
   @override
   Widget build(BuildContext context) {
