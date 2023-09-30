@@ -72,9 +72,8 @@ class RegisterController {
       }
 
       // Regular expression to enforce password policy
-      Pattern pattern =
-          r'^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=*-_]).+$';
-      RegExp regex = new RegExp(pattern as String);
+      RegExp regex = new RegExp(
+          r'^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=*-_]).+$');
 
       if (!regex.hasMatch(password)) {
         ScaffoldMessenger.of(context).showSnackBar(

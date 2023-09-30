@@ -24,6 +24,7 @@ AppBar buildAppBar(String? linkAvt) {
                 image: DecorationImage(
                   image: NetworkImage(linkAvt ??
                       "https://firebasestorage.googleapis.com/v0/b/iwipe-4d9bb.appspot.com/o/avatars%2FavtCat.jpeg?alt=media&token=80b5a3e8-daee-4e95-baf7-7c0a4fe60c29"),
+                  fit: BoxFit.cover,
                 ),
               ),
             ),

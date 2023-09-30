@@ -826,6 +826,8 @@ PODS:
     - StripeUICore (= 23.12.0)
   - StripeUICore (23.12.0):
     - StripeCore (= 23.12.0)
+  - webview_flutter_wkwebview (0.0.1):
+    - Flutter
 
 DEPENDENCIES:
   - cloud_firestore (from `.symlinks/plugins/cloud_firestore/ios`)
@@ -837,6 +839,7 @@ DEPENDENCIES:
   - permission_handler_apple (from `.symlinks/plugins/permission_handler_apple/ios`)
   - shared_preferences_foundation (from `.symlinks/plugins/shared_preferences_foundation/darwin`)
   - stripe_ios (from `.symlinks/plugins/stripe_ios/ios`)
+  - webview_flutter_wkwebview (from `.symlinks/plugins/webview_flutter_wkwebview/ios`)
 
 SPEC REPOS:
   trunk:
@@ -887,6 +890,8 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/shared_preferences_foundation/darwin"
   stripe_ios:
     :path: ".symlinks/plugins/stripe_ios/ios"
+  webview_flutter_wkwebview:
+    :path: ".symlinks/plugins/webview_flutter_wkwebview/ios"
 
 SPEC CHECKSUMS:
   abseil: 926fb7a82dc6d2b8e1f2ed7f3a718bce691d1e46
@@ -925,6 +930,7 @@ SPEC CHECKSUMS:
   StripePaymentSheet: ec04397e9223c86a87be8b348cdbcf2075dd7a16
   StripePaymentsUI: 3dae7fed9b148b2749dff622ece45f9b441b88ce
   StripeUICore: 4a76fa59cab679e1b2fe1ad37d6b08c5bf2ada54
+  webview_flutter_wkwebview: b7e70ef1ddded7e69c796c7390ee74180182971f
 
 PODFILE CHECKSUM: fe1aae2f6ce216cb3f8d3f1424c730016af33226
 

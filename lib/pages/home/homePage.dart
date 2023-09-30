@@ -16,6 +16,7 @@ class _HomePageState extends State<HomePage> {
   String? IDValidation;
   String? paymentStatus;
 
+
   @override
   void initState() {
     super.initState();
@@ -33,10 +34,6 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget build(BuildContext context) {
-    print("username: $username");
-    print("linkAvt: $linkAvt");
-    print("IDValidation: $IDValidation");
-    print("paymentStatus: $paymentStatus");
     return Scaffold(
       appBar: buildAppBar(linkAvt),
       backgroundColor: Colors.white,

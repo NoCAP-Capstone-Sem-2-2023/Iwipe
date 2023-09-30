@@ -23,6 +23,7 @@ class _SettingsPageState extends State<SettingsPage>
   void logOut() {
     context.read<AppBloc>().add(TriggerAppEvent(0));
     Global.storageService.remove(AppConstant.STORAGE_USER_PROFILE);
+    Global.storageService.remove(AppConstant.STORAGE_USER_ID);
     Navigator.of(context)
         .pushNamedAndRemoveUntil('/login', (Route<dynamic> route) => false);
   }

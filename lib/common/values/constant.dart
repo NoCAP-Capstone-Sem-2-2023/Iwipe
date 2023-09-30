@@ -7,4 +7,8 @@ class AppConstant {
   static const String STORAGE_USER_ID = 'USER_ID';
   static String MasterAPITOKEN = dotenv.env['MASTER_API_TOKEN']!;
   static String domain = dotenv.env['DOMAIN']!;
+  static String paypalClientId = dotenv.env['paypalClientId']!;
+  static String paypalSecret = dotenv.env['paypalSecret']!;
+  static String courseID = '3';
+  static String roleID = '5';
 }

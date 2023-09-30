@@ -49,7 +49,10 @@ class SignInController {
             Navigator.of(context)
                 .pushNamedAndRemoveUntil('/app', (route) => false);
           } else {
-            // sign in failed
+            setLoading(false);
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(content: Text('Sign in failed')),
+            );
           }
         } on FirebaseAuthException catch (e) {
           if (e.code == 'user-not-found') {

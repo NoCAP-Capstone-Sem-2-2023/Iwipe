@@ -4,12 +4,13 @@ import 'package:iwipe/pages/home/homePage.dart';
 import 'package:iwipe/pages/profile/profile.dart';
 
 import '../../common/values/colors.dart';
+import '../course/course.dart';
 
 Widget buildPage(int index) {
   List<Widget> _widgetOptions = [
     HomePage(),
     Center(child: Text("Search")),
-    Center(child: Text("Course")),
+    Course(),
     Center(child: Text("Chat")),
     Profile(),
   ];
