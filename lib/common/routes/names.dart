@@ -8,5 +8,6 @@ class AppRoutes{
   static const String settings = '/settings';
   static const String profileSetup = '/profileSetup';
   static const String payment = '/payment';
+  static const String idValidate = '/idValidate';
 
 }

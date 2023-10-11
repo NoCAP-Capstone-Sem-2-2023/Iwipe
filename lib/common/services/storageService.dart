@@ -45,7 +45,6 @@ class StorageService {
     return _sharedPreferences.getString(AppConstant.STORAGE_USER_ID);
   }
 
-
   Future<bool> remove(String key) async {
     return await _sharedPreferences.remove(key);
   }

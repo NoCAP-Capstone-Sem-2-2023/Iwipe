@@ -13,6 +13,8 @@ import 'package:iwipe/pages/splashScreen/bloc/splashScreen_blocs.dart';
 import '../../global.dart';
 import '../../pages/App/AppPage.dart';
 import '../../pages/App/bloc/appBlocs.dart';
+import '../../pages/IDValidate/ID.dart';
+import '../../pages/IDValidate/bloc/id_bloc.dart';
 import '../../pages/payment/bloc/payment_bloc.dart';
 import '../../pages/payment/payment.dart';
 import '../../pages/profile/Settings/bloc/settingsBloc.dart';
@@ -66,6 +68,13 @@ class AppPages {
           bloc: BlocProvider(
             create: (_) => PaymentBloc(),
           )),
+      PageEntity(
+        route: AppRoutes.idValidate,
+        page: IDValidationPage(),
+        bloc: BlocProvider(
+          create: (_) => IdBloc(),
+        ),
+      ),
     ];
   }
 

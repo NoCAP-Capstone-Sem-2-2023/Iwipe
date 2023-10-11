@@ -30,7 +30,6 @@ class _PaymentState extends State<Payment> {
 
   @override
   Widget build(BuildContext context) {
-    // Return BlocBuilder RegisterBloc, RegisterState
     return BlocBuilder<PaymentBloc, PaymentState>(builder: (context, state) {
       return Container(
         color: const Color.fromRGBO(241, 241, 241, 1),

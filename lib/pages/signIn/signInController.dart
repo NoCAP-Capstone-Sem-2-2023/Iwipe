@@ -56,18 +56,38 @@ class SignInController {
           }
         } on FirebaseAuthException catch (e) {
           if (e.code == 'user-not-found') {
-            // user not found
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(content: Text('No user found for that email')),
+            );
           } else if (e.code == 'wrong-password') {
-            // wrong password
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(content: Text('Wrong password provided')),
+            );
             print('wrong password');
           } else if (e.code == 'invalid-email') {
-            // invalid email
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(content: Text('Invalid email')),
+            );
             print('invalid email');
           } else if (e.code == 'user-disabled') {
-            // user disabled
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(content: Text('User disabled')),
+            );
             print('user disabled');
-          } else {}
+          } else if (e.code =='INVALID_LOGIN_CREDENTIALS'){
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(content: Text('Invalid login credentials')),
+            );
+            print('invalid login credentials');
+          } else {
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(content: Text('Sign in failed. Invalid email or password')),
+            );
+            print('sign in failed');
+          }
         }
+
+        setLoading(false);
       }
     } catch (e) {
       print(e);

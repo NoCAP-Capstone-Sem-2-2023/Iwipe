@@ -16,7 +16,6 @@ class _HomePageState extends State<HomePage> {
   String? IDValidation;
   String? paymentStatus;
 
-
   @override
   void initState() {
     super.initState();
@@ -25,6 +24,7 @@ class _HomePageState extends State<HomePage> {
 
   _loadUser() async {
     Map<String, dynamic>? userProfile = Global.storageService.getUserProfile();
+    print(userProfile);
     setState(() {
       username = userProfile?['username'];
       linkAvt = userProfile?['avatar'];
@@ -66,7 +66,7 @@ class _HomePageState extends State<HomePage> {
             ),
             SizedBox(height: 30.h),
             // Check if user has validated ID
-            IDValidation != "Validated"
+            IDValidation == "" || IDValidation == null
                 ? Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -79,8 +79,12 @@ class _HomePageState extends State<HomePage> {
                         ),
                       ),
                       ElevatedButton(
-                        onPressed: () {
-                          Navigator.pushNamed(context, '/idValidation');
+                        onPressed: () async {
+                          final result =
+                              await Navigator.pushNamed(context, '/idValidate');
+                          if (result == true) {
+                            _loadUser(); // Refresh user data if ID is validated.
+                          }
                         },
                         child: Text("Validate ID"),
                       ),
